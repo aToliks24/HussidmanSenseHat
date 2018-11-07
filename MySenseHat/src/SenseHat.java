@@ -88,7 +88,7 @@ public class SenseHat {
 	}
 
 	public void show_letter(String text_string, int[] rgb) {
-		this.python_script = String.format("sense.show_letter(text_string='%s',text_colour=%s);", text_string,
+		this.python_script = String.format("sense.show_letter(s='%s',text_colour=%s);", text_string,
 				Arrays.toString(rgb));
 		this.runPython();
 	}
@@ -136,7 +136,8 @@ public class SenseHat {
 
 	public int get_last_stick_action() {
 		int res = -1;
-		this.python_script = "e=sense.stick.get_events();res='no_action' if len(e)==0 else e[-1].direction;print(res);";
+		String predefine="import subprocess;from threading import Timer;kill = lambda process: process.kill();fnc=sense.stick.wait_for_event;";
+		this.python_script = "sense.show_letter(s='J',text_colour=(123,222,45) ; sense.clear(0,0,0);e=sense.stick.wait_for_event()  ;res= e.direction ;print(res);";
 		String ret = this.runPython();
 		if (ret.equals("middle"))
 			res = 0;
