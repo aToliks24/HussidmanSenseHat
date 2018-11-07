@@ -81,14 +81,14 @@ public class SenseHat {
 		clear(new int[] { 0, 0, 0 });
 	}
 
-	public void show_messege(String text_string, int[] rgb) {
-		this.python_script = String.format("sense.show_messege(text_string=%s,text_color=%s);", text_string,
+	public void show_message(String text_string, int[] rgb) {
+		this.python_script = String.format("sense.show_message(text_string='%s',text_colour=%s);", text_string,
 				Arrays.toString(rgb));
 		this.runPython();
 	}
 
 	public void show_letter(String text_string, int[] rgb) {
-		this.python_script = String.format("sense.show_letter(text_string=%s,text_color=%s);", text_string,
+		this.python_script = String.format("sense.show_letter(text_string='%s',text_colour=%s);", text_string,
 				Arrays.toString(rgb));
 		this.runPython();
 	}
@@ -110,7 +110,7 @@ public class SenseHat {
 		String ret = this.runPython();
 		return Float.valueOf(ret);
 	}
-	
+
 	public float get_pressure() {
 		this.python_script = "print(max([sense.get_pressure() for x in range(100) ]));";
 		String ret = this.runPython();
@@ -125,6 +125,12 @@ public class SenseHat {
 	}
 	
 	
+	public float[] get_accelerometer() {
+		this.python_script = "gyro_only = sense.get_accelerometer_raw();print(gyro_only).values()";
+		String ret = this.runPython();
+		float[] res= string_array_to_floats(ret);
+		return res;
+	}
 	
 	
 
