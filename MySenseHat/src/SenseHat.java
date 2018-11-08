@@ -132,12 +132,10 @@ public class SenseHat {
 		return res;
 	}
 	
-	
-
 	public int get_last_stick_action() {
 		int res = -1;
-		String predefine="import subprocess;from threading import Timer;kill = lambda process: process.kill();fnc=sense.stick.wait_for_event;";
-		this.python_script = "sense.show_letter(s='J',text_colour=(123,222,45) ; sense.clear(0,0,0);e=sense.stick.wait_for_event()  ;res= e.direction ;print(res);";
+		//String predefine="import subprocess;from threading import Timer;kill = lambda process: process.kill();fnc=sense.stick.wait_for_event;";
+		this.python_script = "sense.show_letter(s='J',text_colour=(123,222,45)) ; e=sense.stick.wait_for_event() ;sense.clear(0,0,0) ;res= e.direction ;print(res);";
 		String ret = this.runPython();
 		if (ret.equals("middle"))
 			res = 0;
